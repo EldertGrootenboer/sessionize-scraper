@@ -40,12 +40,8 @@ namespace RvdB.Scrapionize
             int eventUrlIndex = 3;
             var leftHeaders = leftColumn.Descendants(Constants.NAME_HEADING2).ToList();
             result.EventStartDate = ParseSessionizeDate(leftHeaders.ElementAt(0).InnerText);
-
-            if (ParseSessionizeDate(leftHeaders.ElementAt(1).InnerText) != DateTime.MinValue)
-            {
-                result.EventEndDate = ParseSessionizeDate(leftHeaders.ElementAt(1).InnerText);
-            }
-            else
+            result.EventEndDate = ParseSessionizeDate(leftHeaders.ElementAt(1).InnerText);
+            if (result.EventEndDate == DateTime.MinValue)
             {
                 result.EventEndDate = result.EventStartDate;
 				locationIndex = 1;

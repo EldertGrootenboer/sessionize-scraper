@@ -2,7 +2,7 @@
 {
 	internal static class Constants
 	{
-		internal const string DATE_FORMAT = "dd MMM yyyy";
+		internal const string DATE_FORMAT = "d MMM yyyy";
 		internal const string CARRIAGERETURN_LINEFEED = "\r\n";
 		internal const string NAME_TITLE = "ibox-title";
 		internal const string NAME_CONTENT = "ibox-content";
