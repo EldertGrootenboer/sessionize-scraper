@@ -1,6 +1,7 @@
 ﻿// Adapted from https://github.com/rickvdbosch/scrapionize
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -57,9 +58,19 @@ namespace RvdB.Scrapionize
 
             var rightHeaders3 = rightColumn.Descendants(Constants.NAME_HEADING3).ToList();
             rightHeaders3 = rightHeaders3.Skip(rightHeaders3.Count - 3).ToList();
-            result.Travel = rightHeaders3.Count > 0 ? rightHeaders3.ElementAt(0)?.NextSibling.NextSibling.InnerText : string.Empty;
-            result.Accommodation = rightHeaders3.Count > 1 ? rightHeaders3.ElementAt(1)?.NextSibling.NextSibling.InnerText : string.Empty;
-            result.EventFee = rightHeaders3.Count > 2 ? rightHeaders3.ElementAt(2).NextSibling.NextSibling.InnerText : string.Empty;
+
+            var headers = new Dictionary<string, string>();
+
+            for(int i = 0; i < rightHeaders3.Count; i++)
+            {
+                var headerName = rightHeaders3.ElementAt(i).InnerText;
+                var headerValue = rightHeaders3.ElementAt(i)?.NextSibling.NextSibling.InnerText;
+                headers.Add(headerName, headerValue);
+            }
+
+            result.Travel = headers.ContainsKey(Constants.NAME_TRAVEL) ? headers[Constants.NAME_TRAVEL] : string.Empty;
+            result.Accommodation = headers.ContainsKey(Constants.NAME_ACCOMMODATION) ? headers[Constants.NAME_ACCOMMODATION] : string.Empty;
+            result.EventFee = headers.ContainsKey(Constants.NAME_EVENTFEE) ? headers[Constants.NAME_EVENTFEE] : string.Empty;
 
             return result;
         }

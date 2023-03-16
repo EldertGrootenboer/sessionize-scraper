@@ -12,5 +12,8 @@
 		internal const string NAME_HREF = "href";
 		internal const string NAME_LINK = "a";
 		internal const string NAME_SPAN = "span";
+		internal const string NAME_ACCOMMODATION = "accommodation";
+		internal const string NAME_TRAVEL = "travel";
+		internal const string NAME_EVENTFEE = "event fee";
 	}
 }
