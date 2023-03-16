@@ -68,9 +68,9 @@ namespace RvdB.Scrapionize
                 headers.Add(headerName, headerValue);
             }
 
-            result.Travel = headers.ContainsKey(Constants.NAME_TRAVEL) ? headers[Constants.NAME_TRAVEL] : string.Empty;
-            result.Accommodation = headers.ContainsKey(Constants.NAME_ACCOMMODATION) ? headers[Constants.NAME_ACCOMMODATION] : string.Empty;
-            result.EventFee = headers.ContainsKey(Constants.NAME_EVENTFEE) ? headers[Constants.NAME_EVENTFEE] : string.Empty;
+            result.Travel = GetHeaderValue(headers, Constants.NAME_TRAVEL);
+            result.Accommodation = GetHeaderValue(headers, Constants.NAME_ACCOMMODATION);
+            result.EventFee = GetHeaderValue(headers, Constants.NAME_EVENTFEE);
 
             return result;
         }
@@ -82,6 +82,18 @@ namespace RvdB.Scrapionize
             DateTime dateTime = DateTime.MinValue;
             DateTime.TryParseExact(date, Constants.DATE_FORMAT, CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime);
             return dateTime;
+        }
+
+        // Get the value of an entry in the headers dictionary
+        private static string GetHeaderValue(Dictionary<string, string> headers, string key)
+        {
+            return Capitalize(headers.ContainsKey(key) ? headers[key] : string.Empty);
+        }
+
+        // Capitalize the first letter of all words in a string
+        private static string Capitalize(string value)
+        {
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(value);
         }
 
         #endregion
