@@ -68,8 +68,11 @@ namespace RvdB.Scrapionize
                 headers.Add(headerName, headerValue);
             }
 
-            result.Travel = GetHeaderValue(headers, Constants.NAME_TRAVEL);
-            result.Accommodation = GetHeaderValue(headers, Constants.NAME_ACCOMMODATION);
+            var travel = GetHeaderValue(headers, Constants.NAME_TRAVEL);
+            var accommodation = GetHeaderValue(headers, Constants.NAME_ACCOMMODATION);
+
+            result.Travel = string.IsNullOrEmpty(travel) ? Constants.VALUE_NOTCOVERED : travel;
+            result.Accommodation = string.IsNullOrEmpty(accommodation) ? Constants.VALUE_NOTCOVERED : accommodation;
             result.EventFee = GetHeaderValue(headers, Constants.NAME_EVENTFEE);
 
             return result;

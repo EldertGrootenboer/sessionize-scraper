@@ -15,5 +15,6 @@
 		internal const string NAME_ACCOMMODATION = "accommodation";
 		internal const string NAME_TRAVEL = "travel";
 		internal const string NAME_EVENTFEE = "event fee";
+		internal const string VALUE_NOTCOVERED = "Not Covered";
 	}
 }
