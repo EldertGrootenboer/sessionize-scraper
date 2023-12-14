@@ -50,7 +50,7 @@ namespace RvdB.Scrapionize
             }
 
             result.Location = string.Join(Constants.CARRIAGERETURN_LINEFEED, leftHeaders.ElementAt(locationIndex).Descendants(Constants.NAME_SPAN).Select(d => d.InnerText.Trim()));
-            result.EventUrl = leftHeaders.ElementAt(eventUrlIndex).Descendants(Constants.NAME_LINK).Single().Attributes[Constants.NAME_HREF].Value;
+            result.EventUrl = leftHeaders.Count > eventUrlIndex ? leftHeaders.ElementAt(eventUrlIndex)?.Descendants(Constants.NAME_LINK).Single().Attributes[Constants.NAME_HREF].Value : string.Empty;
 
             var rightHeaders2 = rightColumn.Descendants(Constants.NAME_HEADING2).ToList();
             result.CfpStartDate = ParseSessionizeDate(rightHeaders2.ElementAt(0).InnerText);
